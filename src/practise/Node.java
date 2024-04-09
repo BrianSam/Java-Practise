@@ -20,16 +20,31 @@ public class Node implements Iterable{
     }
     @Override
     public Iterator<Node> iterator() {
-        return null;
+
     }
 
-    @Override
-    public void forEach(Consumer action) {
-        Iterable.super.forEach(action);
+    class NodeIterator implements Iterator<Node>{
+        Node head;
+        public NodeIterator(Node head){
+            this.head  = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if(head==null || head.next==null){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+        @Override
+        public Node next() {
+            Node curr = head;
+            head=head.next;
+            return curr;
+        }
     }
 
-    @Override
-    public Spliterator spliterator() {
-        return Iterable.super.spliterator();
-    }
 }
